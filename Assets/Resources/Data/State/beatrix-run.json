@@ -1,0 +1,18 @@
+[
+  [
+    {
+      "ClassName": "TT.PlayAnim",
+      "ClassInfoName": "TT.PlayAnimInfo",
+      "data": {
+        "AnimName": "MoveFWD_Normal_InPlace_SwordAndShield"
+      }
+    },
+    {
+      "ClassName": "InputKeyCondition",
+      "ClassInfoName": "KeyInfo",
+      "data": {
+        "KeyName": "A"
+      }
+    }
+  ]
+]

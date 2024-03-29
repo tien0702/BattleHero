@@ -1,0 +1,11 @@
+[
+  [
+    {
+      "ClassName": "InputKeyCondition",
+      "ClassInfoName": "KeyInfo",
+      "data": {
+        "KeyName": "Space"
+      }
+    }
+  ]
+]

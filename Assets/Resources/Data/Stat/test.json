@@ -1,0 +1,29 @@
+[
+  [
+    {
+      "StatID": "ATK",
+      "BaseValue": 100,
+      "MaxFinalValue": 1000
+    },
+    {
+      "StatID": "HP",
+      "BaseValue": 100,
+      "MaxFinalValue": 1000
+    },
+    {
+      "StatID": "ASPD",
+      "BaseValue": 100,
+      "MaxFinalValue": 1000
+    },
+    {
+      "StatID": "AttackRange",
+      "BaseValue": 100,
+      "MaxFinalValue": 1000
+    },
+    {
+      "StatID": "SPD",
+      "BaseValue": 7,
+      "MaxFinalValue": 1000
+    }
+  ]
+]

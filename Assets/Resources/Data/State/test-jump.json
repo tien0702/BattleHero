@@ -1,0 +1,50 @@
+[
+  [
+    {
+      "ClassName": "TT.PlayAnim",
+      "ClassInfoName": "TT.PlayAnimInfo",
+      "data": {
+        "AnimName": "JumpFull_Normal_RM_SwordAndShield"
+      }
+    },
+    {
+      "ClassName": "InputKeyCondition",
+      "ClassInfoName": "KeyInfo",
+      "data": {
+        "KeyName": "Space"
+      }
+    },
+    {
+      "ClassName": "GroundCondition",
+      "ClassInfoName": "GroundConditionInfo",
+      "data": {
+        "LayerName": "Ground",
+        "GroundName": "GroundCheck",
+        "OnGround": true
+      }
+    },
+    {
+      "ClassName": "JumpHandle",
+      "ClassInfoName": "JumpHandleInfo",
+      "data": {
+        "JoystickID": "Move",
+        "Force": 15
+      }
+    },
+    {
+      "ClassName": "DelayHandle",
+      "ClassInfoName": "DelayHandleInfo",
+      "data": {
+        "DelayTime": 0.1
+      }
+    },
+    {
+      "ClassName": "LookByJoystick",
+      "ClassInfoName": "LookByJoystickInfo",
+      "data": {
+        "JoystickID": "Move",
+        "RotateSpeed": 1
+      }
+    }
+  ]
+]

@@ -1,0 +1,32 @@
+[
+    [
+      {
+        "ClassName": "TT.PlayAnim",
+        "ClassInfoName": "TT.PlayAnimInfo",
+        "data": {
+          "AnimName": "Attack03_SwordAndShiled"
+        }
+      },
+      {
+        "ClassName": "GroundCondition",
+        "ClassInfoName": "GroundConditionInfo",
+        "data": {
+          "LayerName": "Ground",
+          "GroundName": "GroundCheck",
+          "OnGround": false
+        }
+      },
+      {
+        "ClassName": "FallCondition"
+      },
+      {
+        "ClassName": "LookByJoystick",
+        "ClassInfoName": "LookByJoystickInfo",
+        "data": {
+          "JoystickID": "Move",
+          "RotateSpeed": 1
+        }
+      }
+    ]
+  ]
+  

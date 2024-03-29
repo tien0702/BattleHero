@@ -1,0 +1,29 @@
+[
+  [
+    {
+      "ClassName": "TT.PlayAnim",
+      "ClassInfoName": "TT.PlayAnimInfo",
+      "data": {
+        "AnimName": "Attack01_SwordAndShiled"
+      }
+    },
+    {
+      "ClassName": "InputKeyCondition",
+      "ClassInfoName": "KeyInfo",
+      "data": {
+        "KeyName": "A"
+      }
+    },
+    {
+      "ClassName": "WaitForEndAnim"
+    },
+    {
+      "ClassName": "AttackSegmentCondition",
+      "ClassInfoName": "AttackSegmentConditionInfo",
+      "data": {
+        "PreSegmentName": "a3",
+        "TimeAction": 0.7
+      }
+    }
+  ]
+]

@@ -1,0 +1,44 @@
+[
+  [
+    {
+      "ClassName": "TT.PlayAnim",
+      "ClassInfoName": "TT.PlayAnimInfo",
+      "data": {
+        "AnimName": "MoveFWD_Normal_InPlace_SwordAndShield"
+      }
+    },
+    {
+      "ClassName": "JoystickCondition",
+      "ClassInfoName": "JoystickConditionInfo",
+      "data": {
+        "JoystickID": "Move",
+        "IsControl": true
+      }
+    },
+    {
+      "ClassName": "GroundCondition",
+      "ClassInfoName": "GroundConditionInfo",
+      "data": {
+        "LayerName": "Ground",
+        "GroundName": "GroundCheck",
+        "OnGround": true
+      }
+    },
+    {
+      "ClassName": "MovementHandle",
+      "ClassInfoName": "MovementHandleInfo",
+      "data": {
+        "StatID": "SPD",
+        "JoystickID": "Move"
+      }
+    },
+    {
+      "ClassName": "LookByJoystick",
+      "ClassInfoName": "LookByJoystickInfo",
+      "data": {
+        "JoystickID": "Move",
+        "RotateSpeed": 1
+      }
+    }
+  ]
+]

@@ -1,0 +1,28 @@
+[
+  [
+    {
+      "ClassName": "TT.PlayAnim",
+      "ClassInfoName": "TT.PlayAnimInfo",
+      "data": {
+        "AnimName": "Idle_Battle_SwordAndShield"
+      }
+    },
+    {
+      "ClassName": "JoystickCondition",
+      "ClassInfoName": "JoystickConditionInfo",
+      "data": {
+        "JoystickID": "Move",
+        "IsControl": false
+      }
+    },
+    {
+      "ClassName": "GroundCondition",
+      "ClassInfoName": "GroundConditionInfo",
+      "data": {
+        "LayerName": "Ground",
+        "GroundName": "GroundCheck",
+        "OnGround": true
+      }
+    }
+  ]
+]

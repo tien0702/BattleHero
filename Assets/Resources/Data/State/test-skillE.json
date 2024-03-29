@@ -1,0 +1,11 @@
+[
+  [
+    {
+      "ClassName": "TT.PlayAnim",
+      "ClassInfoName": "TT.PlayAnimInfo",
+      "data": {
+        "AnimName": "MoveFWD_Normal_InPlace_SwordAndShield"
+      }
+    }
+  ]
+]

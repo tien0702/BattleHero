@@ -1,0 +1,93 @@
+[
+  [
+    {
+      "ClassName": "TT.StateController",
+      "ClassInfoName": "TT.StateInfo",
+      "data": {
+        "StateName": "idle",
+        "InterruptibleStates": [],
+        "NextStates": [
+          "a1",
+          "run",
+          "hurt",
+          "jump",
+          "skillE",
+          "skillQ"
+        ]
+      }
+    },
+    {
+      "ClassName": "TT.StateController",
+      "ClassInfoName": "TT.StateInfo",
+      "data": {
+        "StateName": "run",
+        "InterruptibleStates": ["jump", "idle", "a1"],
+        "NextStates": ["hurt", "skillE", "skillQ"]
+      }
+    },
+    {
+      "ClassName": "TT.StateController",
+      "ClassInfoName": "TT.StateInfo",
+      "data": {
+        "StateName": "jump",
+        "InterruptibleStates": ["fall"],
+        "NextStates": ["run", "a1", "skillE", "skillQ"]
+      }
+    },
+    {
+      "ClassName": "TT.StateController",
+      "ClassInfoName": "TT.StateInfo",
+      "data": {
+        "StateName": "fall",
+        "InterruptibleStates": [],
+        "NextStates": ["run", "idle", "skillE", "skillQ"]
+      }
+    },
+    {
+      "ClassName": "TT.StateController",
+      "ClassInfoName": "TT.StateInfo",
+      "data": {
+        "StateName": "a1",
+        "InterruptibleStates": ["a2"],
+        "NextStates": [
+          "run",
+          "idle",
+          "hurt",
+          "skillE",
+          "skillQ"
+        ]
+      }
+    },
+    {
+      "ClassName": "TT.StateController",
+      "ClassInfoName": "TT.StateInfo",
+      "data": {
+        "StateName": "a2",
+        "InterruptibleStates": ["a3"],
+        "NextStates": [
+          "run",
+          "idle",
+          "run",
+          "hurt",
+          "skillE",
+          "skillQ"
+        ]
+      }
+    },
+    {
+      "ClassName": "TT.StateController",
+      "ClassInfoName": "TT.StateInfo",
+      "data": {
+        "StateName": "a3",
+        "InterruptibleStates": ["a1"],
+        "NextStates": [
+          "run",
+          "idle",
+          "hurt",
+          "skillE",
+          "skillQ"
+        ]
+      }
+    }
+  ]
+]

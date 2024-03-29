@@ -1,0 +1,52 @@
+{
+    "data": [
+      {
+        "ClassName": "TT.StateController",
+        "ClassInfoName": "TT.StateInfo",
+        "data": {
+          "StateName": "test-idle",
+          "InterruptibleStates": [],
+          "NextStates": [
+            "test-a1",
+            "test-run",
+            "test-hurt",
+            "test-jump",
+            "test-skillE",
+            "test-skillQ"
+          ],
+          "data": [
+            {
+              "conditions": [
+                {
+                  "ClassName": "JoystickCondition",
+                  "ClassInfoName": "JoystickConditionInfo",
+                  "data": {
+                    "JoystickID": "Move",
+                    "IsControl": false
+                  }
+                },
+                {
+                  "ClassName": "OnGroundCondition",
+                  "ClassInfoName": "OnGroundConditionInfo",
+                  "data": {
+                    "LayerName": "Ground",
+                    "GroundName": "GroundCheck"
+                  }
+                }
+              ],
+              "handles": [
+                {
+                  "ClassName": "TT.PlayAnim",
+                  "ClassInfoName": "TT.PlayAnimInfo",
+                  "data": {
+                    "AnimName": "Idle_Battle_SwordAndShield"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+  

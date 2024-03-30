@@ -22,7 +22,7 @@
     },
     {
       "StatID": "SPD",
-      "BaseValue": 7,
+      "BaseValue": 5,
       "MaxFinalValue": 1000
     }
   ]

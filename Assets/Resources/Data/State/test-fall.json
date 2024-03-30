@@ -4,7 +4,7 @@
         "ClassName": "TT.PlayAnim",
         "ClassInfoName": "TT.PlayAnimInfo",
         "data": {
-          "AnimName": "Attack03_SwordAndShiled"
+          "AnimName": "Idle_Battle_SwordAndShield"
         }
       },
       {

@@ -49,7 +49,7 @@ public class LookByJoystick : BaseHandleBehaviour, IInfo
     public override void Handle()
     {
         this.enabled = true;
-        EndHandle();
+        //EndHandle();
     }
 
     public override void ResetHandle()

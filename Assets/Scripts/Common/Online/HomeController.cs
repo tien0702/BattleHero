@@ -6,11 +6,16 @@ using System.Text;
 using TMPro;
 using TT;
 using UnityEngine;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class HomeController : MonoBehaviourPunCallbacks
 {
     public const string RoomTypeProperty = "RoomType";
     public string[] RoomTypes = new string[] { "DUAL", "BATTLE_ROYAL" };
+
+    private string _roomTypeToJoin;
+
+    public TypedLobby Lobby { get; private set; } = new TypedLobby("Lobby", LobbyType.Default);
 
     public GameObject _roomList, roomPreb;
 
@@ -26,7 +31,10 @@ public class HomeController : MonoBehaviourPunCallbacks
 
             User user = new User() { NickName = GenerateRandomString(5) };
             ServiceLocator.Current.Register(user);
+            PhotonNetwork.LocalPlayer.NickName = user.NickName;
         }
+
+        _roomTypeToJoin = RoomTypes[0];
     }
 
     private void Start()
@@ -36,10 +44,8 @@ public class HomeController : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        var user = ServiceLocator.Current.Get<User>();
         Debug.Log("connect to master!");
         PhotonNetwork.JoinLobby();
-        PhotonNetwork.LocalPlayer.NickName = user.NickName;
     }
 
     public void LeaveRoom()
@@ -54,31 +60,34 @@ public class HomeController : MonoBehaviourPunCallbacks
             Debug.LogWarning("PhotoNetwork is not connected!");
             return;
         }
+        _roomTypeToJoin = roomType;
+        Hashtable expectedCustomProperties = new Hashtable();
+        expectedCustomProperties.Add(RoomTypeProperty, _roomTypeToJoin);
 
-        List<RoomInfo> rooms = _rooms.FindAll(r =>
-            (r.CustomProperties != null) &&
-            (r.CustomProperties.TryGetValue(RoomTypeProperty, out object val) &&
-            (val as string).Equals(roomType))
-        );
-        if (rooms.Count <= 0 && !RoomTypes.Any(r => r.Equals(roomType)))
-        {
-            Debug.Log("RoomType is not valid!");
-            return;
-        }
+        PhotonNetwork.JoinRandomRoom(expectedCustomProperties, _roomTypeToJoin.Equals(RoomTypes[0]) ? (byte)(2) : (byte)(8));
+    }
 
-        foreach (RoomInfo room in rooms)
-        {
-            if (room.PlayerCount >= room.MaxPlayers) continue;
-            PhotonNetwork.JoinRoom(room.Name);
-            return;
-        }
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        CreateRoomByType(_roomTypeToJoin);
+    }
 
-        CreateAndJoinRoomByType(roomType);
+    public void CreateRoomByType(string roomType)
+    {
+        RoomOptions roomOptions = new RoomOptions();
+
+        Hashtable customRoomProperties = new Hashtable();
+        customRoomProperties.Add(RoomTypeProperty, roomType);
+        roomOptions.CustomRoomProperties = customRoomProperties;
+        roomOptions.CustomRoomPropertiesForLobby = new string[] { RoomTypeProperty };
+        roomOptions.MaxPlayers = roomType.Equals(RoomTypes[0]) ? (byte)(2) : (byte)(8);
+        string randomRoomCode = GenerateRandomString(8);
+        Debug.Log("CreateRoom: " + randomRoomCode);
+        PhotonNetwork.CreateRoom(randomRoomCode, roomOptions);
     }
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("OnJoinedRoom");
         _searchingPanel.SetActive(false);
         _roomCtrlPanel.SetActive(true);
     }
@@ -88,56 +97,23 @@ public class HomeController : MonoBehaviourPunCallbacks
         Debug.Log("OnLeftRoom");
     }
 
-    public override void OnMasterClientSwitched(Player newMasterClient)
-    {
-
-    }
-
-    public void CreateAndJoinRoomByType(string roomType)
-    {
-        if (!RoomTypes.Any(r => r.Equals(roomType)))
-        {
-            Debug.Log("RoomType is not valid!");
-            return;
-        }
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable();
-
-        if (RoomTypes[0].Equals(roomType))
-        {
-            roomOptions.MaxPlayers = 2;
-        }
-        else
-        {
-            roomOptions.MaxPlayers = 8;
-        }
-
-        string randomRoomCode = GenerateRandomString(8);
-
-        Debug.Log("CreateRoom: " + randomRoomCode);
-        ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable();
-        customRoomProperties.Add(HomeController.RoomTypeProperty, roomType);
-        roomOptions.CustomRoomProperties = customRoomProperties;
-        PhotonNetwork.CreateRoom(randomRoomCode, roomOptions);
-    }
-
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        foreach(RoomInfo room in  roomList)
+        Debug.Log("room list update - count: " + _rooms.Count);
+        foreach (RoomInfo room in roomList)
         {
             if (room.RemovedFromList) _rooms.Remove(room);
-            else _rooms.Add(room);
+            else if (!_rooms.Contains(room)) _rooms.Add(room);
         }
 
-        foreach(Transform child in _roomList.transform)
+        foreach (Transform child in _roomList.transform)
         {
             Destroy(child.gameObject);
         }
-        foreach(RoomInfo roomInfo in _rooms)
+        foreach (RoomInfo roomInfo in _rooms)
         {
             Instantiate(roomPreb, _roomList.transform).GetComponent<TextMeshProUGUI>().text = roomInfo.Name;
         }
-        Debug.Log("room list update - count: " + _rooms.Count);
     }
 
     public static string GenerateRandomString(int length)

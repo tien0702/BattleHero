@@ -12,7 +12,7 @@ public class NotifyController : MonoBehaviour, IGameService
 
     private void Awake()
     {
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(this.gameObject);
         if (!ServiceLocator.Current.IsRegistered<NotifyController>())
         {
             ServiceLocator.Current.Register(this);

@@ -48,18 +48,13 @@ public class RoomController : MonoBehaviourPunCallbacks
             teamLayout.SetActive(true);
             _roomCode.text = "Room Code: " + PhotonNetwork.CurrentRoom.Name;
             _teamSlots = teamLayout.GetComponentsInChildren<TeamSlotController>().ToList();
-        }
-    }
 
-    public override void OnJoinedRoom()
-    {
-        Debug.Log("OnJoinedRoom");
-        foreach (var slot in _teamSlots)
-        {
-            if (slot.UserInfo == null)
+            _teamSlots.ForEach(slot => slot.SetPlayer(null, null));
+            Player[] players = PhotonNetwork.PlayerList;
+
+            for (int i = 0; i < players.Count(); ++i)
             {
-                slot.SetPlayer(null, ServiceLocator.Current.Get<User>());
-                break;
+                _teamSlots[i].SetPlayer(null, new User() { NickName = players[i].NickName });
             }
         }
     }
@@ -67,13 +62,12 @@ public class RoomController : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         Debug.Log("OnPlayerEnteredRoom");
-        foreach (var slot in _teamSlots)
+        _teamSlots.ForEach(slot => slot.SetPlayer(null, null));
+        Player[] players = PhotonNetwork.PlayerList;
+
+        for (int i = 0; i < players.Count(); ++i)
         {
-            if (slot.UserInfo == null)
-            {
-                slot.SetPlayer(null, ServiceLocator.Current.Get<User>());
-                break;
-            }
+            _teamSlots[i].SetPlayer(null, new User() { NickName = players[i].NickName });
         }
     }
 

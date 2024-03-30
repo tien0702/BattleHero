@@ -6,14 +6,7 @@
       "data": {
         "StateName": "idle",
         "InterruptibleStates": [],
-        "NextStates": [
-          "a1",
-          "run",
-          "hurt",
-          "jump",
-          "skillE",
-          "skillQ"
-        ]
+        "NextStates": ["a1", "run", "hurt", "jump", "skillE", "skillQ"]
       }
     },
     {
@@ -31,7 +24,7 @@
       "data": {
         "StateName": "jump",
         "InterruptibleStates": ["fall"],
-        "NextStates": ["run", "a1", "skillE", "skillQ"]
+        "NextStates": ["a1", "skillE", "skillQ"]
       }
     },
     {
@@ -39,7 +32,7 @@
       "ClassInfoName": "TT.StateInfo",
       "data": {
         "StateName": "fall",
-        "InterruptibleStates": [],
+        "InterruptibleStates": ["run", "idle"],
         "NextStates": ["run", "idle", "skillE", "skillQ"]
       }
     },
@@ -49,13 +42,7 @@
       "data": {
         "StateName": "a1",
         "InterruptibleStates": ["a2"],
-        "NextStates": [
-          "run",
-          "idle",
-          "hurt",
-          "skillE",
-          "skillQ"
-        ]
+        "NextStates": ["run", "idle", "hurt", "skillE", "skillQ"]
       }
     },
     {
@@ -64,14 +51,7 @@
       "data": {
         "StateName": "a2",
         "InterruptibleStates": ["a3"],
-        "NextStates": [
-          "run",
-          "idle",
-          "run",
-          "hurt",
-          "skillE",
-          "skillQ"
-        ]
+        "NextStates": ["run", "idle", "run", "hurt", "skillE", "skillQ"]
       }
     },
     {
@@ -80,13 +60,7 @@
       "data": {
         "StateName": "a3",
         "InterruptibleStates": ["a1"],
-        "NextStates": [
-          "run",
-          "idle",
-          "hurt",
-          "skillE",
-          "skillQ"
-        ]
+        "NextStates": ["run", "idle", "hurt", "skillE", "skillQ"]
       }
     }
   ]

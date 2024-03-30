@@ -27,8 +27,16 @@ public class TeamSlotController : MonoBehaviour
 
     public void SetPlayer(HeroInfo heroInfo, User user)
     {
-        _playerName.text = user.NickName;
-        _botLayout.SetActive(false);
-        _userLayout.SetActive(true);
+        if (heroInfo == null && user == null)
+        {
+            _botLayout.SetActive(true);
+            _userLayout.SetActive(false);
+        }
+        else
+        {
+            _playerName.text = user.NickName;
+            _botLayout.SetActive(false);
+            _userLayout.SetActive(true);
+        }
     }
 }

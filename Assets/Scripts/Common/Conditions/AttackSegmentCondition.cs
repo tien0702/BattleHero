@@ -7,7 +7,7 @@ using UnityEngine;
 public class AttackSegmentConditionInfo
 {
     public string PreSegmentName;
-    public float TimeAction;
+    public float CastingTime;
 }
 
 public class AttackSegmentCondition : BaseCondition, IInfo, IOwn
@@ -52,7 +52,7 @@ public class AttackSegmentCondition : BaseCondition, IInfo, IOwn
     {
         this.SetSuitableCondition(false);
         float animTime = _animator.GetCurrentAnimatorStateInfo(0).length;
-        LeanTween.delayedCall(Info.TimeAction * animTime, () =>
+        LeanTween.delayedCall(Info.CastingTime * animTime, () =>
         {
             this.SetSuitableCondition(true);
         });

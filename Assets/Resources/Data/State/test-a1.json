@@ -22,7 +22,7 @@
       "ClassInfoName": "AttackSegmentConditionInfo",
       "data": {
         "PreSegmentName": "a3",
-        "TimeAction": 0.7
+        "CastingTime": 0.7
       }
     }
   ]

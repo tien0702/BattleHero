@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5086268201243115593}
   - component: {fileID: 8158787969259999212}
   - component: {fileID: 6259195511646583590}
-  - component: {fileID: 8175158894909787863}
   - component: {fileID: 1902369126083923300}
   m_Layer: 0
   m_Name: OHS03PBR
@@ -85,19 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8175158894909787863
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5610884078883986163}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.22095373, y: 0.9943508, z: 0.08912742}
-  m_Center: {x: -0.00000014901161, y: 0.6857638, z: -0.000000037252903}
 --- !u!114 &1902369126083923300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,3 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68f10da8d24e3184da8e0577be2c2ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Info>k__BackingField:
+    Type: 
+    Name: 
+    Level: 0
+  Dame: 0

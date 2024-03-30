@@ -25,7 +25,7 @@
       "ClassInfoName": "AttackSegmentConditionInfo",
       "data": {
         "PreSegmentName": "a1",
-        "TimeAction": 0.7
+        "CastingTime": 0.7
       }
     }
   ]

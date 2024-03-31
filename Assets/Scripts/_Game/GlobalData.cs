@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TT;
 
-public class GlobalData
+public class GlobalData : IGameService
 {
-    public static EntityInfo CharacterSelected;
+    public EntityInfo CharacterSelected;
+    public string MapName;
 }

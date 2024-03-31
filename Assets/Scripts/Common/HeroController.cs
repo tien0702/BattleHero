@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using TT;
 
-public class HeroController : EntityController
+public class HeroController : EntityController, IDamageable
 {
-    protected virtual void Awake()
-    {
-        this.Level = Info.Level;
-    }
-
+    public HealthController HealCtrl { protected set; get; }
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.F))
         {
 
+            var floatText = ServiceLocator.Current.Get<FloatingTextService>().GetByName("Heal");
+            floatText.Spawn(transform.position, 100);
         }
-        if(Input.GetKeyDown(KeyCode.Tab))
-        {
-
-        }
+    }
+    public void TakeDame(DamageMessage message)
+    {
+        var floatText = ServiceLocator.Current.Get<FloatingTextService>().GetByName("Heal");
+        floatText.Spawn(transform.position, message.Dame);
+        if (HealCtrl != null) HealCtrl.CurrentValue -= message.Dame;
     }
 }

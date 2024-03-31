@@ -43,4 +43,16 @@ public class GameObjectUtilities
 
         return null;
     }
+
+    public static List<Transform> GetChildren(Transform parent)
+    {
+        List<Transform> result = new List<Transform>();
+        foreach (Transform child in parent)
+        {
+            if (child.Equals(parent)) continue;
+            result.Add(child);
+        }
+
+        return result;
+    }
 }

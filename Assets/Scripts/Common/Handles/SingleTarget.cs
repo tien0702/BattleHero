@@ -31,12 +31,6 @@ public class SingleTarget : MonoBehaviour, IInfo, IOwn
 
     private void OnTriggerEnter(Collider other)
     {
-        IDamageable idamage = other.gameObject.GetComponentInChildren<IDamageable>();
-        if (idamage != null)
-        {
-            _collider.enabled = false;
 
-            idamage.TakeDame(null, Vector3.zero);
-        }
     }
 }

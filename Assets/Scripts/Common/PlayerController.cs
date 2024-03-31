@@ -1,12 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using TT;
 using UnityEngine;
 
 public class PlayerController : HeroController
 {
-    protected override void Awake()
+    HealthController healthController;
+    public void SetInfo(EntityInfo info)
     {
-        Info = GlobalData.CharacterSelected;
-        base.Awake();
+        this.Info = info;
+        this.Level = Info.Level;
+    }
+
+    private void Start()
+    {
+        var healthBar = Resources.Load<HealthController>("Prefabs/UI/HeroHealthBar");
+
+        healthController = Instantiate(healthBar, transform);
+        healthController.transform.localPosition = new Vector3(0, 2, 0);
     }
 }

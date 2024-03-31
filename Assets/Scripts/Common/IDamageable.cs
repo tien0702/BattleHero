@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    void TakeDame(GameObject attacker, Vector3 direction);
+    void TakeDame(DamageMessage message);
 }

@@ -13,6 +13,7 @@ public class ShowStateName : MonoBehaviour
 
     private void Start()
     {
+        target = GameObject.FindAnyObjectByType<PlayerController>().gameObject;
         stateMachine = target.GetComponent<StateMachine>();
         textMeshProUGUI = GetComponent<TextMeshProUGUI>();
         stateMachine.Events.RegisterEvent(StateMachine.StateMachineEventType.OnChangeState

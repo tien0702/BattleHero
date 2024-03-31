@@ -1,24 +1,14 @@
 using DamageNumbersPro;
 using System.Collections;
 using System.Collections.Generic;
+using TT;
 using UnityEngine;
 
 public class TestDame : MonoBehaviour, IDamageable
 {
-    public DamageNumberMesh damageMesh;
-
-    public void TakeDame(GameObject attacker, Vector3 direction)
+    public void TakeDame(DamageMessage message)
     {
-        Debug.Log("TakeDame");
+        var floatText = ServiceLocator.Current.Get<FloatingTextService>().GetByName("Heal");
+        floatText.Spawn(transform.position, message.Dame);
     }
-
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.S))
-        {
-            damageMesh.Spawn(transform.position + Vector3.up, UnityEngine.Random.Range(0, 100).ToString());
-        }
-    }
-
 }

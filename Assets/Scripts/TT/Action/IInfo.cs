@@ -1,4 +1,6 @@
 
+using UnityEngine;
+
 namespace TT
 {
     public interface IInfo

@@ -37,7 +37,7 @@ public class RoomController : MonoBehaviourPunCallbacks
         }
 
         // Get roomType Property
-        string roomType = PhotonNetwork.CurrentRoom.CustomProperties[HomeController.RoomTypeProperty].ToString();
+        string roomType = PhotonNetwork.CurrentRoom.CustomProperties[HomeManager.RoomTypeProperty].ToString();
 
         if (!_layouts.TryGetValue(roomType, out GameObject teamLayout))
         {

@@ -15,6 +15,15 @@
       }
     },
     {
+      "ClassName": "MeleeAttack",
+      "ClassInfoName": "MeleeAttackInfo",
+      "data": {
+        "Range": 1,
+        "MaxTargets": 2,
+        "LayerMark": "Hero"
+      }
+    },
+    {
       "ClassName": "WaitForEndAnim",
       "ClassInfoName": "",
       "data": {

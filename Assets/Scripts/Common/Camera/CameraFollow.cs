@@ -8,6 +8,11 @@ public class CameraFollow : MonoBehaviour
     public Vector3 offset;
     public float smoothSpeed;
 
+    private void Start()
+    {
+        target = GameObject.FindAnyObjectByType<PlayerController>().transform;
+    }
+
     void FixedUpdate()
     {
         if (target != null)

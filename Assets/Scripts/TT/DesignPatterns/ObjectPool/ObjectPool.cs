@@ -1,34 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Xml.Linq;
 
 namespace TT
 {
-    public class ObjectPool : Singleton<ObjectPool>
+    public class ObjectPool : IGameService
     {
         static Dictionary<string, Tuple<Transform, LinkedList<MonoBehaviour>>> _pools
             = new Dictionary<string, Tuple<Transform, LinkedList<MonoBehaviour>>>();
-
-        public T GetObject<T>(string poolName) where T : MonoBehaviour
-        {
-            if (!_pools.ContainsKey(poolName))
-            {
-                return null;
-            }
-
-            LinkedList<MonoBehaviour> objects = _pools[poolName].Item2;
-
-            foreach (MonoBehaviour obj in objects)
-            {
-                if (obj != null && !obj.gameObject.activeSelf)
-                {
-                    obj.gameObject.SetActive(true);
-                    return obj as T;
-                }
-            }
-            return null;
-        }
 
         public Transform CreatePool<T>(string poolName, T prefab, int size) where T : MonoBehaviour
         {
@@ -54,10 +33,32 @@ namespace TT
             return pool;
         }
 
+        public T GetObject<T>(string poolName) where T : MonoBehaviour
+        {
+            if (!_pools.ContainsKey(poolName))
+            {
+                Debug.LogWarning($"GetObject failed! Because PoolName: {poolName} is not exists!");
+                return null;
+            }
+
+            LinkedList<MonoBehaviour> objects = _pools[poolName].Item2;
+
+            foreach (MonoBehaviour obj in objects)
+            {
+                if (obj != null && !obj.gameObject.activeSelf)
+                {
+                    obj.gameObject.SetActive(true);
+                    return obj as T;
+                }
+            }
+            return null;
+        }
+
         public bool AddMoreObject(string poolName, int amount)
         {
             if (!_pools.ContainsKey(poolName))
             {
+                Debug.LogWarning($"AddMoreObject failed! Because PoolName: {poolName} is not exists!");
                 return false;
             }
 
@@ -92,6 +93,7 @@ namespace TT
         {
             if (!_pools.ContainsKey(poolName))
             {
+                Debug.LogWarning($"DestroyPool failed! Because PoolName: {poolName} is not exists!");
                 return;
             }
 

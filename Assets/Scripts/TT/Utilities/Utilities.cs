@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 namespace TT
@@ -36,6 +37,19 @@ namespace TT
         public static string FormatTime(int hours, int minutes, int seconds)
         {
             return $"{hours:D2}:{minutes:D2}:{seconds:D2}";
+        }
+
+        public static string GenerateRandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            StringBuilder stringBuilder = new StringBuilder(length);
+
+            for (int i = 0; i < length; i++)
+            {
+                stringBuilder.Append(chars[Random.Range(0, chars.Length)]);
+            }
+
+            return stringBuilder.ToString();
         }
     }
 }

@@ -8,7 +8,7 @@ using TT;
 using UnityEngine;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
-public class HomeManager : MonoBehaviourPunCallbacks
+public class HomeSceneService : MonoBehaviourPunCallbacks, IGameService
 {
     public const string RoomTypeProperty = "RoomType";
     public string[] RoomTypes = new string[] { "DUAL", "BATTLE_ROYAL" };
@@ -29,7 +29,7 @@ public class HomeManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.ConnectUsingSettings();
 
-            User user = new User() { NickName = GenerateRandomString(5) };
+            User user = new User() { NickName = Utilities.GenerateRandomString(5) };
             ServiceLocator.Current.Register(user);
             PhotonNetwork.LocalPlayer.NickName = user.NickName;
         }
@@ -81,7 +81,7 @@ public class HomeManager : MonoBehaviourPunCallbacks
         roomOptions.CustomRoomProperties = customRoomProperties;
         roomOptions.CustomRoomPropertiesForLobby = new string[] { RoomTypeProperty };
         roomOptions.MaxPlayers = roomType.Equals(RoomTypes[0]) ? (byte)(2) : (byte)(8);
-        string randomRoomCode = GenerateRandomString(8);
+        string randomRoomCode = Utilities.GenerateRandomString(8);
         Debug.Log("CreateRoom: " + randomRoomCode);
         PhotonNetwork.CreateRoom(randomRoomCode, roomOptions);
     }
@@ -90,11 +90,6 @@ public class HomeManager : MonoBehaviourPunCallbacks
     {
         _searchingPanel.SetActive(false);
         _roomCtrlPanel.SetActive(true);
-    }
-
-    public override void OnLeftRoom()
-    {
-        Debug.Log("OnLeftRoom");
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -114,18 +109,5 @@ public class HomeManager : MonoBehaviourPunCallbacks
         {
             Instantiate(roomPreb, _roomList.transform).GetComponent<TextMeshProUGUI>().text = roomInfo.Name;
         }
-    }
-
-    public static string GenerateRandomString(int length)
-    {
-        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        StringBuilder stringBuilder = new StringBuilder(length);
-
-        for (int i = 0; i < length; i++)
-        {
-            stringBuilder.Append(chars[Random.Range(0, chars.Length)]);
-        }
-
-        return stringBuilder.ToString();
     }
 }

@@ -6,10 +6,12 @@ using TMPro;
 using TT;
 using System.Linq;
 using Photon.Realtime;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
+
 
 public class RoomController : MonoBehaviourPunCallbacks
 {
-    [SerializeField] GameObject _layoutsObj;
+    [SerializeField] GameObject _layoutsObj, _selectArenaBtn, _startBtn;
     Dictionary<string, GameObject> _layouts;
 
     [SerializeField] TextMeshProUGUI _roomCode;
@@ -19,6 +21,25 @@ public class RoomController : MonoBehaviourPunCallbacks
     public override void OnEnable()
     {
         base.OnEnable();
+
+        // Check connect photon
+        if (!PhotonNetwork.IsConnected)
+        {
+            Debug.LogWarning("Photon is not connected!");
+            return;
+        }
+
+        // Display MasterClient's buttons
+        if (PhotonNetwork.IsMasterClient)
+        {
+            _selectArenaBtn.SetActive(true);
+            _startBtn.SetActive(true);
+        }
+        else
+        {
+            _selectArenaBtn.SetActive(false);
+            _startBtn.SetActive(false);
+        }
 
         // Find all layouts
         if (_layouts == null)
@@ -37,7 +58,7 @@ public class RoomController : MonoBehaviourPunCallbacks
         }
 
         // Get roomType Property
-        string roomType = PhotonNetwork.CurrentRoom.CustomProperties[HomeManager.RoomTypeProperty].ToString();
+        string roomType = PhotonNetwork.CurrentRoom.CustomProperties[HomeSceneService.RoomTypeProperty].ToString();
 
         if (!_layouts.TryGetValue(roomType, out GameObject teamLayout))
         {
@@ -46,28 +67,52 @@ public class RoomController : MonoBehaviourPunCallbacks
         else
         {
             teamLayout.SetActive(true);
-            _roomCode.text = "Room Code: " + PhotonNetwork.CurrentRoom.Name;
+            _roomCode.text = PhotonNetwork.CurrentRoom.Name;
             _teamSlots = teamLayout.GetComponentsInChildren<TeamSlotController>().ToList();
+        }
 
-            _teamSlots.ForEach(slot => slot.SetPlayer(null, null));
-            Player[] players = PhotonNetwork.PlayerList;
+        Hashtable playerCustomProps = new Hashtable();
+        playerCustomProps.Add("avtName", "");
+        playerCustomProps.Add("heroName", "");
+        playerCustomProps.Add("heroLv", 1);
+        PhotonNetwork.LocalPlayer.SetCustomProperties(playerCustomProps);
+        UpdateSlotInfo();
+    }
 
-            for (int i = 0; i < players.Count(); ++i)
-            {
-                _teamSlots[i].SetPlayer(null, new User() { NickName = players[i].NickName });
-            }
+    public void ToggleTeamParticipation(bool value)
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.CurrentRoom.IsVisible = value;
+        }
+    }
+
+    public override void OnLeftRoom()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.SetMasterClient(PhotonNetwork.MasterClient.GetNext());
         }
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        Debug.Log("OnPlayerEnteredRoom");
-        _teamSlots.ForEach(slot => slot.SetPlayer(null, null));
-        Player[] players = PhotonNetwork.PlayerList;
+        UpdateSlotInfo();
+    }
 
-        for (int i = 0; i < players.Count(); ++i)
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        UpdateSlotInfo();
+    }
+
+    void UpdateSlotInfo()
+    {
+        Debug.Log("UpdateSlotInfo");
+        Player[] players = PhotonNetwork.PlayerList;
+        _teamSlots.ForEach(t => t.UpdateTeamSlotInfomation(null, null, null, 1));
+        for (int i = 0; i < players.Length; ++i)
         {
-            _teamSlots[i].SetPlayer(null, new User() { NickName = players[i].NickName });
+            _teamSlots[i].UpdateTeamSlotInfomation(players[i].NickName, "", "", (byte)1);
         }
     }
 

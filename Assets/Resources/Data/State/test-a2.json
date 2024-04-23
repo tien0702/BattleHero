@@ -4,7 +4,7 @@
       "ClassName": "TT.PlayAnim",
       "ClassInfoName": "TT.PlayAnimInfo",
       "data": {
-        "AnimName": "Attack02_SwordAndShiled"
+        "AnimName": "Attack02"
       }
     },
     {
@@ -20,7 +20,8 @@
       "data": {
         "Range": 1,
         "MaxTargets": 2,
-        "LayerMark": "Hero"
+        "LayerMark": "Hero",
+        "EffectsData": "[{\"ClassName\": \"Knockback\",\"ClassInfoName\": \"KnockbackInfo\",\"data\":{\"Force\": 4}}]"
       }
     },
     {
@@ -35,6 +36,15 @@
       "data": {
         "PreSegmentName": "a1",
         "CastingTime": 0.7
+      }
+    },
+    {
+      "ClassName": "MoveOnAttack",
+      "ClassInfoName": "MoveOnAttackInfo",
+      "data": {
+        "Range": 5,
+        "Force": 5,
+        "LookAngle": 90
       }
     }
   ]

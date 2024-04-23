@@ -1,0 +1,17 @@
+[
+  [
+    {
+      "ClassName": "TT.PlayAnim",
+      "ClassInfoName": "TT.PlayAnimInfo",
+      "data": {
+        "AnimName": "Die01"
+      }
+    },
+    {
+      "ClassName": "WaitForEndAnim"
+    },
+    {
+      "ClassName": "DeadCondition"
+    }
+  ]
+]

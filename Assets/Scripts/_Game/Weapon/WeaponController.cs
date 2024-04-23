@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using TT;
 
-public class WeaponController : BaseEntity
+public class WeaponController : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("collision");
-    }
+    #region Events
+    public enum WeapEvent { OnAttack, OnEndAttack, OnHitTarget }
+    public ObserverEvents<WeapEvent, object> Events { protected set; get; }
+    = new ObserverEvents<WeapEvent, object>();
+    #endregion
+    [SerializeField] Collider _weaponCollider;
 
-    protected override void OnLevelUp(int level)
-    {
+    public HeroController Owner;
 
+    protected virtual void OnTriggerEnter(Collider other)
+    {
+        Events.Notify(WeapEvent.OnHitTarget, other.transform.parent != null ? other.transform.parent : other.transform);
     }
 }

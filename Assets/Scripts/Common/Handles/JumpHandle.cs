@@ -18,6 +18,7 @@ public class JumpHandle : BaseHandle, IInfo, IOwn
 
     public override void Handle()
     {
+        _rb.velocity = Vector3.zero;
         Vector3 direction = new Vector3(_joystick.Direction.x, 1, _joystick.Direction.y);
         _rb.AddForce(direction.normalized / 2f * Info.Force, ForceMode.Impulse);
         EndHandle();

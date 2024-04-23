@@ -5,6 +5,8 @@ using TT;
 
 public class GameManager : MonoBehaviour, IGameService
 {
+    public const string JoyMoveId = "Move";
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 
     static void BeforeSceneLoad()

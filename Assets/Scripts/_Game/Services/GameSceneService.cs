@@ -48,6 +48,7 @@ public class GameSceneService : MonoBehaviour, IGameService
         var rb = hero.AddComponent<Rigidbody>();
         rb.mass = 0.5f;
         rb.freezeRotation = true;
+        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
         hero.transform.position = standingPositions[index].position;
 
         EntityInfo info = new EntityInfo();

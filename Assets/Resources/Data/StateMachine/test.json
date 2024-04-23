@@ -5,8 +5,8 @@
       "ClassInfoName": "TT.StateInfo",
       "data": {
         "StateName": "idle",
-        "InterruptibleStates": [],
-        "NextStates": ["a1", "run", "hurt", "jump", "skillE", "skillQ"]
+        "InterruptibleStates": ["dead", "hurt", "skillQ"],
+        "NextStates": ["a1", "run", "jump", "skillE"]
       }
     },
     {
@@ -14,8 +14,8 @@
       "ClassInfoName": "TT.StateInfo",
       "data": {
         "StateName": "run",
-        "InterruptibleStates": ["jump", "idle", "a1"],
-        "NextStates": ["hurt", "skillE", "skillQ"]
+        "InterruptibleStates": ["dead", "hurt", "skillQ", "jump", "idle", "a1"],
+        "NextStates": ["skillE", "skillQ"]
       }
     },
     {
@@ -23,7 +23,7 @@
       "ClassInfoName": "TT.StateInfo",
       "data": {
         "StateName": "jump",
-        "InterruptibleStates": ["fall"],
+        "InterruptibleStates": ["dead", "hurt", "fall"],
         "NextStates": ["a1", "skillE", "skillQ"]
       }
     },
@@ -32,7 +32,7 @@
       "ClassInfoName": "TT.StateInfo",
       "data": {
         "StateName": "fall",
-        "InterruptibleStates": ["run", "idle"],
+        "InterruptibleStates": ["dead", "hurt", "run", "idle"],
         "NextStates": ["run", "idle", "skillE", "skillQ"]
       }
     },
@@ -41,7 +41,7 @@
       "ClassInfoName": "TT.StateInfo",
       "data": {
         "StateName": "a1",
-        "InterruptibleStates": ["a2"],
+        "InterruptibleStates": ["dead", "hurt", "a2"],
         "NextStates": ["run", "idle", "hurt", "skillE", "skillQ"]
       }
     },
@@ -50,7 +50,7 @@
       "ClassInfoName": "TT.StateInfo",
       "data": {
         "StateName": "a2",
-        "InterruptibleStates": ["a3"],
+        "InterruptibleStates": ["dead", "hurt", "a3"],
         "NextStates": ["run", "idle", "run", "hurt", "skillE", "skillQ"]
       }
     },
@@ -59,8 +59,35 @@
       "ClassInfoName": "TT.StateInfo",
       "data": {
         "StateName": "a3",
-        "InterruptibleStates": ["a1"],
+        "InterruptibleStates": ["dead", "hurt", "a1"],
         "NextStates": ["run", "idle", "hurt", "skillE", "skillQ"]
+      }
+    },
+    {
+      "ClassName": "TT.StateController",
+      "ClassInfoName": "TT.StateInfo",
+      "data": {
+        "StateName": "hurt",
+        "InterruptibleStates": ["dead"],
+        "NextStates": ["idle", "run"]
+      }
+    },
+    {
+      "ClassName": "TT.StateController",
+      "ClassInfoName": "TT.StateInfo",
+      "data": {
+        "StateName": "skillQ",
+        "InterruptibleStates": ["dead"],
+        "NextStates": ["run", "idle"]
+      }
+    },
+    {
+      "ClassName": "TT.StateController",
+      "ClassInfoName": "TT.StateInfo",
+      "data": {
+        "StateName": "dead",
+        "InterruptibleStates": [],
+        "NextStates": []
       }
     }
   ]

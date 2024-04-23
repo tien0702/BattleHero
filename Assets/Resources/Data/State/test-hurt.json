@@ -1,11 +1,20 @@
 [
   [
     {
-      "ClassName": "InputKeyCondition",
-      "ClassInfoName": "KeyInfo",
+      "ClassName": "TT.PlayAnim",
+      "ClassInfoName": "TT.PlayAnimInfo",
       "data": {
-        "KeyName": "Space"
+        "AnimName": "GetHit01"
       }
+    },
+    {
+      "ClassName": "WaitForEndAnim",
+      "ClassInfoName": "",
+      "data": {
+      }
+    },
+    {
+      "ClassName": "TakeDamageCondition"
     }
   ]
 ]

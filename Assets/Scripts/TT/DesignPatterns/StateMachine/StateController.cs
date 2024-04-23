@@ -66,11 +66,6 @@ namespace TT
 
         protected LinkedList<IOwn> _owns = new LinkedList<IOwn>();
 
-        protected virtual void Awake()
-        {
-            _stateMachine = GetComponent<StateMachine>();
-        }
-
         protected virtual void Start()
         {
             foreach(IOwn own in _owns) own.SetOwn(this);
@@ -102,7 +97,7 @@ namespace TT
         public virtual void OnEnter()
         {
             Events.Notify(StateEventType.OnEnter, this);
-            ResetConditions();
+            ResetConditions();  
             Action();
         }
 

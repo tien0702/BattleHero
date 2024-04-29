@@ -13,9 +13,13 @@ public class PlayerController : HeroController
     {
         base.Start();
         var healthBar = Resources.Load<HealthController>("Prefabs/UI/HeroHealthBar");
+        var groundDirection = Resources.Load<GroundDirectionController>("Prefabs/GroundDirection");
+        var gd = Instantiate(groundDirection);
+        gd.Model = GameObjectUtilities.FindObjectByTag(transform, "Model").transform;
+        gd.GroundCheck = GameObjectUtilities.FindObjectByTag(transform, "GroundCheck").transform;
 
         HealCtrl = Instantiate(healthBar, transform);
-        HealCtrl.Health = EntityStatCtrl.GetStatByID("HP").FinalValue;
+        HealCtrl.Health = EntityStatCtrl.GetStatByID(DefineStatID.HP).FinalValue;
         Weapon = GetComponentInChildren<WeaponController>();
     }
 

@@ -1,16 +1,10 @@
 [
   [
     {
-      "ClassName": "TT.TargetController",
-      "ClassInfoName": ""
+      "ClassName": "TT.TargetController"
     },
     {
-      "ClassName": "NearestTarget",
-      "ClassInfoName": ""
-    },
-    {
-      "ClassName": "TT.FilterTargetController",
-      "ClassInfoName": ""
+      "ClassName": "TT.AutoFilterTargetController"
     },
     {
       "ClassName": "TT.EntityStatController",

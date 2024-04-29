@@ -9,7 +9,7 @@ namespace TT
     public class JoystickController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         #region Manager Joystick
-        static Dictionary<string, JoystickController> joysticks = new Dictionary<string, JoystickController>();
+        static Dictionary<string, JoystickController> _joysticks = new Dictionary<string, JoystickController>();
 
         public static void AddJoystick(JoystickController joystick, bool destroyIfExists = true)
         {
@@ -19,7 +19,7 @@ namespace TT
                 return;
             }
 
-            if (joysticks.ContainsKey(joystick.JoysickID))
+            if (_joysticks.ContainsKey(joystick.JoysickID))
             {
                 Debug.Log(string.Format("Joystick ID: {0} exists!", joystick.JoysickID));
                 if (destroyIfExists)
@@ -30,18 +30,18 @@ namespace TT
             }
             else
             {
-                joysticks.Add(joystick.joysickID, joystick);
+                _joysticks.Add(joystick._joysickID, joystick);
             }
         }
 
         public static void RemoveJoystick(JoystickController joystick)
         {
-            joysticks.Remove(joystick.joysickID);
+            _joysticks.Remove(joystick._joysickID);
         }
 
         public static JoystickController GetJoystick(string nameType)
         {
-            if (joysticks.ContainsKey(nameType)) return joysticks[nameType];
+            if (_joysticks.ContainsKey(nameType)) return _joysticks[nameType];
             return null;
         }
         #endregion
@@ -52,17 +52,22 @@ namespace TT
         public ObserverEvents<JoystickEvent, JoystickController> Events => _events;
         #endregion
 
-        [SerializeField] protected Image joystick;
-        [SerializeField] protected Transform handle;
+        [Header("References")]
+        [SerializeField] protected Image _joystick;
+        [SerializeField] protected Transform _handle;
 
-        [SerializeField] protected string joysickID;
-        protected Vector2 originPos;
-        protected Vector2 direction;
-        protected float radius;
+        [Header("Informations")]
+        [SerializeField] protected string _joysickID;
+        protected Vector2 _originPos;
+        protected Vector2 _direction;
+        protected float _radius;
 
-        public virtual float Radius => radius;
-        public virtual string JoysickID => joysickID;
-        public virtual Vector3 Direction => direction;
+        #region Get Method
+        public virtual float Radius => _radius;
+        public virtual string JoysickID => _joysickID;
+        public virtual Vector3 Direction => _direction;
+        public virtual bool IsControl => !_direction.Equals(Vector3.zero);
+        #endregion
 
         protected virtual void Awake()
         {
@@ -71,13 +76,13 @@ namespace TT
 
         protected virtual void Start()
         {
-            originPos = joystick.transform.position;
-            RectTransform joyRect = joystick.GetComponent<RectTransform>();
+            _originPos = _joystick.transform.position;
+            RectTransform joyRect = _joystick.GetComponent<RectTransform>();
 
             RectTransform rectCanvas = FindRectOfCanvasInParent(transform.parent);
             float canvasRectLocalScale = rectCanvas ? rectCanvas.localScale.x : 1f;
 
-            radius = (joyRect.rect.width / 2f) * canvasRectLocalScale;
+            _radius = (joyRect.rect.width / 2f) * canvasRectLocalScale;
         }
 
         protected virtual void OnDestroy()
@@ -97,25 +102,25 @@ namespace TT
 
         public virtual void OnBeginDrag(PointerEventData eventData)
         {
-            joystick.transform.position = eventData.position;
+            _joystick.transform.position = eventData.position;
             _events.Notify(JoystickEvent.JoyBeginDrag, this);
         }
 
         public virtual void OnDrag(PointerEventData eventData)
         {
-            Vector2 realDirection = Vector2.ClampMagnitude(eventData.position - (Vector2)joystick.transform.position, radius);
+            Vector2 realDirection = Vector2.ClampMagnitude(eventData.position - (Vector2)_joystick.transform.position, _radius);
 
-            direction = realDirection.normalized;
-            handle.position = (Vector2)joystick.transform.position + realDirection;
+            _direction = realDirection.normalized;
+            _handle.position = (Vector2)_joystick.transform.position + realDirection;
             _events.Notify(JoystickEvent.JoyDrag, this);
         }
 
         public virtual void OnEndDrag(PointerEventData eventData)
         {
-            joystick.transform.position = originPos;
-            handle.localPosition = Vector2.zero;
+            _joystick.transform.position = _originPos;
+            _handle.localPosition = Vector2.zero;
             _events.Notify(JoystickEvent.JoyEndDrag, this);
-            direction = Vector2.zero;
+            _direction = Vector2.zero;
         }
     }
 }

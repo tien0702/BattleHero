@@ -39,8 +39,8 @@
       "ClassName": "MoveOnAttack",
       "ClassInfoName": "MoveOnAttackInfo",
       "data": {
-        "Range": 5,
-        "Force": 4,
+        "Range": 4,
+        "Force": 3,
         "LookAngle": 90
       }
     }

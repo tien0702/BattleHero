@@ -13,6 +13,7 @@ public class HeroController : EntityController, IDamageable
     public HealthController HealCtrl { protected set; get; }
     public WeaponController Weapon { protected set; get; }
     public EntityStatController EntityStatCtrl { protected set; get; }
+    public Transform Model;
 
     protected virtual void Start()
     {

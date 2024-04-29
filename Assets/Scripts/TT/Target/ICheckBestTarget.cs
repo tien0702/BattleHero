@@ -4,6 +4,6 @@ namespace TT
 {
     public interface ICheckBestTarget
     {
-        public bool CheckBestTarget(Transform target1, Transform target2);
+        public bool CheckBestTarget(Transform current, Transform next);
     }
 }

@@ -4,7 +4,7 @@
       "ClassName": "TT.PlayAnim",
       "ClassInfoName": "TT.PlayAnimInfo",
       "data": {
-        "AnimName": "Attack03"
+        "AnimName": "Attack01"
       }
     },
     {
@@ -21,14 +21,11 @@
         "Range": 1,
         "MaxTargets": 2,
         "LayerMark": "Hero",
-        "EffectsData": "[{\"ClassName\": \"Knockback\",\"ClassInfoName\": \"KnockbackInfo\",\"data\":{\"Force\": 5}}]"
+        "EffectsData": "[{\"ClassName\": \"Knockback\",\"ClassInfoName\": \"KnockbackInfo\",\"data\":{\"Force\": 10}}]"
       }
     },
     {
-      "ClassName": "WaitForEndAnim",
-      "ClassInfoName": "",
-      "data": {
-      }
+      "ClassName": "WaitForEndAnim"
     },
     {
       "ClassName": "AttackSegmentCondition",
@@ -42,8 +39,8 @@
       "ClassName": "MoveOnAttack",
       "ClassInfoName": "MoveOnAttackInfo",
       "data": {
-        "Range": 5,
-        "Force": 5,
+        "Range": 4,
+        "Force": 3,
         "LookAngle": 90
       }
     }

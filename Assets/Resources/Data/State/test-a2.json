@@ -25,10 +25,7 @@
       }
     },
     {
-      "ClassName": "WaitForEndAnim",
-      "ClassInfoName": "",
-      "data": {
-      }
+      "ClassName": "WaitForEndAnim"
     },
     {
       "ClassName": "AttackSegmentCondition",
@@ -42,8 +39,8 @@
       "ClassName": "MoveOnAttack",
       "ClassInfoName": "MoveOnAttackInfo",
       "data": {
-        "Range": 5,
-        "Force": 5,
+        "Range": 4,
+        "Force": 3,
         "LookAngle": 90
       }
     }

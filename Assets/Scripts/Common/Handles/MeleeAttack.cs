@@ -20,11 +20,11 @@ public class MeleeAttack : BaseHandle, IOwn, IInfo
     EntityStatController _statController;
     AnimationEventReceiver _animationEvent;
     Collider _weapCollider;
+    CameraShake _cameraShake;
 
     //Informations
     IBattleEffect[] _effects;
     HashSet<Transform> _targets = new HashSet<Transform>();
-    List<GameObject> _hitEffectSpawned = new List<GameObject>();
 
     public override void Handle()
     {
@@ -49,15 +49,17 @@ public class MeleeAttack : BaseHandle, IOwn, IInfo
     {
         Transform target = data as Transform;
         IDamageable damageable = target.GetComponent<IDamageable>();
+        _cameraShake.Shake(0.1f, 0.05f);
 
         if (damageable != null && _targets.Add(target))
         {
-            var prefab = Resources.Load<ParticleSystem>("Prefabs/Effects/RoundHitRed");
+            var efPool = ServiceLocator.Current.Get<ObjectPool>();
 
-            var ef = GameObject.Instantiate(prefab, target.transform);
-            _hitEffectSpawned.Add(ef.gameObject);
+            var ef = efPool.GetObject<ParticleSystem>("HitEffect");
 
+            ef.transform.position = target.position + Vector3.up;
             ef.Play();
+            LeanTween.delayedCall(ef.main.duration, () => { ef.gameObject.SetActive(false); });
             if (damageable != null)
             {
                 DamageMessage message = new DamageMessage()
@@ -87,6 +89,7 @@ public class MeleeAttack : BaseHandle, IOwn, IInfo
         {
             this.Info = (MeleeAttackInfo)info;
             _effects = BattleEffectUtils.GetEffectsText(Info.EffectsData);
+            _cameraShake = GameObject.FindAnyObjectByType<CameraShake>();
         }
     }
 

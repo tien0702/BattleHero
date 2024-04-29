@@ -18,7 +18,7 @@ namespace TT
 
         void OnEnter(StateController state)
         {
-            _animator.Play(_animHash);
+            _animator.Play(_animHash, 0, 0);
         }
 
         public void SetOwn(object own)

@@ -1,16 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TT;
+using System.Collections;
+using Unity.VisualScripting;
 
 public class WaitForEndAnim : BaseHandle, IOwn
 {
     Animator _animator;
+    float _delayTime;
 
     public override void Handle()
     {
-        LeanTween.delayedCall(_animator.GetCurrentAnimatorStateInfo(0).length, 
-            () => { this.EndHandle(); });
+        ObjectHelper.Instance.WaitOneFrame(() =>
+        {
+            _delayTime = _animator.GetCurrentAnimatorStateInfo(0).length;
+            LeanTween.delayedCall(_delayTime,
+                () => { this.EndHandle(); });
+        });
     }
 
     public override void ResetHandle()

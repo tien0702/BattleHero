@@ -13,8 +13,8 @@ public class Knockback : IBattleEffect, IInfo
     public KnockbackInfo Info { get; private set; }
     public void HandleEffect(GameObject target, Vector3 direction)
     {
-        Debug.Log("knockback");
         var rb = target.GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
         rb.AddForce(direction.normalized * Info.Force, ForceMode.Impulse);
     }
 

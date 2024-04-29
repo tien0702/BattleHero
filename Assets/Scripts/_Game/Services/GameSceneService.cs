@@ -1,7 +1,5 @@
 using Photon.Pun;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TT;
 using UnityEngine;
 
@@ -13,6 +11,12 @@ public class GameSceneService : MonoBehaviour, IGameService
     {
         var gameSceneManager = GameObject.FindAnyObjectByType<GameSceneService>();
         ServiceLocator.Current.Register(gameSceneManager);
+
+        ObjectPool objectPool = new ObjectPool();
+        ServiceLocator.Current.Register(objectPool);
+
+        var hitEffect = Resources.Load<ParticleSystem>("Prefabs/Effects/RoundHitRed");
+        objectPool.CreatePool("HitEffect", hitEffect, 10);
 
         ServiceLocator.Current.Get<GlobalData>().MapName = "1vs1";
     }

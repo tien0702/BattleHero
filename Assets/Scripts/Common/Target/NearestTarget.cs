@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TT;
 
-public class NearestTarget : MonoBehaviour, ICheckBestTarget
+public class NearestTarget : ICheckBestTarget
 {
-    public bool CheckBestTarget(Transform target1, Transform target2)
+    public Transform Own;
+    public bool CheckBestTarget(Transform current, Transform next)
     {
-        float distance1 = Vector3.Distance(transform.position, target1.position);
-        float distance2 = Vector3.Distance(transform.position, target2.position);
+        float distance1 = Vector3.Distance(Own.position, current.position);
+        float distance2 = Vector3.Distance(Own.position, next.position);
 
-        return distance1 < distance2;
+        return distance1 > distance2;
     }
 }

@@ -190,7 +190,7 @@ MonoBehaviour:
       m_NumAlphaKeys: 2
     fromNumber: 10
     toNumber: 100
-  durationFadeIn: 0.2
+  durationFadeIn: 0.15
   enableOffsetFadeIn: 1
   offsetFadeIn: {x: 0.5, y: 0}
   enableScaleFadeIn: 1
@@ -200,7 +200,7 @@ MonoBehaviour:
   enableShakeFadeIn: 0
   shakeOffsetFadeIn: {x: 0, y: 1.5}
   shakeFrequencyFadeIn: 4
-  durationFadeOut: 0.2
+  durationFadeOut: 0.15
   enableOffsetFadeOut: 1
   offsetFadeOut: {x: 0.5, y: 0}
   enableScaleFadeOut: 0
@@ -460,8 +460,8 @@ MonoBehaviour:
     radius: 4
     pushOffset: 0.8
   updateDelay: 0.0125
-  enablePooling: 0
-  poolSize: 50
+  enablePooling: 1
+  poolSize: 30
   disableOnSceneLoad: 1
   editorLastFont: Neon-Red3D
   position: {x: 0, y: 0, z: 0}

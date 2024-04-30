@@ -28,8 +28,8 @@
       "ClassName": "MovementHandle",
       "ClassInfoName": "MovementHandleInfo",
       "data": {
-        "StatID": "SPD",
-        "JoystickID": "Move"
+        "Multiplier": 1,
+        "EndImmediate": false
       }
     },
     {

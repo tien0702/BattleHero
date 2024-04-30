@@ -8,6 +8,7 @@ public class ObjectHelper : SingletonBehaviour<ObjectHelper>
     protected override void Awake()
     {
         base.Awake();
+        DontDestroyOnLoad(gameObject);
     }
 
     public void WaitOneFrame(Action callback)

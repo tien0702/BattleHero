@@ -6,8 +6,8 @@ using TT;
 [System.Serializable]
 public class MovementHandleInfo
 {
-    public string StatID;
-    public string JoystickID;
+    public float Multiplier;
+    public bool EndImmediate;
 }
 
 public class MovementHandle : BaseHandleBehaviour, IInfo
@@ -21,9 +21,9 @@ public class MovementHandle : BaseHandleBehaviour, IInfo
     {
         StateController state = GetComponent<StateController>();
         EntityStatController statCtrl = state.GetComponent<EntityStatController>();
-        _spd = statCtrl.GetStatByID(Info.StatID);
-        _joystick = JoystickController.GetJoystick(Info.JoystickID);
-        _joystick.Events.RegisterEvent(JoystickController.JoystickEvent.JoyEndDrag, 
+        _spd = statCtrl.GetStatByID(DefineStatID.SPD);
+        _joystick = JoystickController.GetJoystick(GameManager.JoyMoveId);
+        _joystick.Events.RegisterEvent(JoystickController.JoystickEvent.JoyEndDrag,
             (JoystickController joy) => { EndHandle(); });
         _rb = state.GetComponent<Rigidbody>();
         this.enabled = false;
@@ -31,17 +31,25 @@ public class MovementHandle : BaseHandleBehaviour, IInfo
 
     private void Update()
     {
-        Vector3 direction = new Vector3(_joystick.Direction.x, 0, _joystick.Direction.y);
-        _rb.AddForce(direction.normalized * _spd.FinalValue, ForceMode.Force);
-        if(_rb.velocity.magnitude > _spd.FinalValue)
+        if (!Info.EndImmediate && !_joystick.IsControl)
         {
-            _rb.velocity = direction.normalized * _spd.FinalValue;
+            EndHandle();
+            return;
+        }
+
+        Vector3 direction = _joystick.Direction3D;
+        float targetSpeed = _spd.FinalValue * Info.Multiplier;
+        _rb.AddForce(direction.normalized * targetSpeed, ForceMode.Force);
+        if (_rb.velocity.magnitude > targetSpeed)
+        {
+            _rb.velocity = direction.normalized * targetSpeed;
         }
     }
 
     public override void Handle()
     {
         this.enabled = true;
+        if (Info.EndImmediate) EndHandle();
     }
 
     public override void ResetHandle()
@@ -52,7 +60,7 @@ public class MovementHandle : BaseHandleBehaviour, IInfo
 
     public void SetInfo(object info)
     {
-        if(info is MovementHandleInfo)
+        if (info is MovementHandleInfo)
         {
             Info = (MovementHandleInfo)info;
         }

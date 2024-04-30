@@ -1,10 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationEventReceiver : MonoBehaviour
+public class AnimEventReceiver : MonoBehaviour
 {
+    public Action<string> OnTriggerEvents;
     public Action OnAttack, OnEndAttack;
     public void Attack()
     {
@@ -14,5 +13,10 @@ public class AnimationEventReceiver : MonoBehaviour
     public void EndAttack()
     {
         OnEndAttack?.Invoke();
+    }
+
+    public void OnTriggerEvent(string eventName)
+    {
+        OnTriggerEvents?.Invoke(eventName);
     }
 }

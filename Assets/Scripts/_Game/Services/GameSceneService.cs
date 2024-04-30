@@ -16,7 +16,7 @@ public class GameSceneService : MonoBehaviour, IGameService
         ServiceLocator.Current.Register(objectPool);
 
         var hitEffect = Resources.Load<ParticleSystem>("Prefabs/Effects/RoundHitRed");
-        objectPool.CreatePool("HitEffect", hitEffect, 10);
+        objectPool.CreatePool("HitEffect", hitEffect, 20);
 
         ServiceLocator.Current.Get<GlobalData>().MapName = "1vs1";
     }

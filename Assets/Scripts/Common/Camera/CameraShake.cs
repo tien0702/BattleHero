@@ -6,6 +6,8 @@ public class CameraShake : MonoBehaviour
 {
     Camera cam;
 
+    Coroutine _coroutine;
+
     private void Awake()
     {
         cam = Camera.main;
@@ -13,7 +15,8 @@ public class CameraShake : MonoBehaviour
 
     public void Shake(float duration, float magnitude)
     {
-        StartCoroutine(StartShake(duration, magnitude));
+        if (_coroutine != null) StopCoroutine(_coroutine);
+        _coroutine = StartCoroutine(StartShake(duration, magnitude));
     }
 
     IEnumerator StartShake(float duration, float magnitude)

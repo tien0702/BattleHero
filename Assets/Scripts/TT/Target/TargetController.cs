@@ -47,7 +47,6 @@ namespace TT
                 for (int i = 0; i < checkBestTargets.Length; i++)
                 {
                     if (!checkBestTargets[i].CheckBestTarget(result.transform, target.transform)) continue;
-                    Debug.Log($"Change {result.gameObject.name} to {target.gameObject.name}");
                     result = target;
                 }
             }
@@ -94,6 +93,7 @@ namespace TT
             return result;
         }
         #endregion
+
         protected virtual void Awake()
         {
             if (_targets == null) _targets = new List<TargetController>();

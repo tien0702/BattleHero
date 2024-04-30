@@ -5,7 +5,7 @@
       "ClassInfoName": "TT.StateInfo",
       "data": {
         "StateName": "idle",
-        "InterruptibleStates": ["dead", "hurt", "skillQ"],
+        "InterruptibleStates": ["dead", "hurt", "skillQ", "skillE"],
         "NextStates": ["a1", "run", "jump", "skillE"]
       }
     },
@@ -14,7 +14,7 @@
       "ClassInfoName": "TT.StateInfo",
       "data": {
         "StateName": "run",
-        "InterruptibleStates": ["dead", "hurt", "skillQ", "jump", "idle", "a1"],
+        "InterruptibleStates": ["dead", "hurt", "skillQ", "skillE", "jump", "idle", "a1"],
         "NextStates": ["skillE", "skillQ"]
       }
     },
@@ -41,8 +41,8 @@
       "ClassInfoName": "TT.StateInfo",
       "data": {
         "StateName": "a1",
-        "InterruptibleStates": ["dead", "hurt", "a2"],
-        "NextStates": ["run", "idle", "hurt", "skillE", "skillQ"]
+        "InterruptibleStates": ["dead", "hurt", "skillE", "skillQ", "a2"],
+        "NextStates": ["run", "idle", "hurt"]
       }
     },
     {
@@ -50,7 +50,7 @@
       "ClassInfoName": "TT.StateInfo",
       "data": {
         "StateName": "a2",
-        "InterruptibleStates": ["dead", "hurt", "a3"],
+        "InterruptibleStates": ["dead", "hurt", "skillE", "skillQ", "a3"],
         "NextStates": ["run", "idle", "run", "hurt", "skillE", "skillQ"]
       }
     },
@@ -59,7 +59,7 @@
       "ClassInfoName": "TT.StateInfo",
       "data": {
         "StateName": "a3",
-        "InterruptibleStates": ["dead", "hurt", "a1"],
+        "InterruptibleStates": ["dead", "hurt", "skillE", "skillQ", "a1"],
         "NextStates": ["run", "idle", "hurt", "skillE", "skillQ"]
       }
     },
@@ -77,6 +77,15 @@
       "ClassInfoName": "TT.StateInfo",
       "data": {
         "StateName": "skillQ",
+        "InterruptibleStates": ["dead"],
+        "NextStates": ["run", "idle"]
+      }
+    },
+    {
+      "ClassName": "TT.StateController",
+      "ClassInfoName": "TT.StateInfo",
+      "data": {
+        "StateName": "skillE",
         "InterruptibleStates": ["dead"],
         "NextStates": ["run", "idle"]
       }

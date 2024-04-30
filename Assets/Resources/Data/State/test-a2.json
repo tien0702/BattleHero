@@ -19,7 +19,6 @@
       "ClassInfoName": "MeleeAttackInfo",
       "data": {
         "Range": 1,
-        "MaxTargets": 2,
         "LayerMark": "Hero",
         "EffectsData": "[{\"ClassName\": \"Knockback\",\"ClassInfoName\": \"KnockbackInfo\",\"data\":{\"Force\": 4}}]"
       }

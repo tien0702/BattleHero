@@ -4,7 +4,7 @@
       "ClassName": "TT.PlayAnim",
       "ClassInfoName": "TT.PlayAnimInfo",
       "data": {
-        "AnimName": "Unti"
+        "AnimName": "Untimate"
       }
     },
     {
@@ -16,6 +16,25 @@
     },
     {
       "ClassName": "WaitForEndAnim"
+    },
+    {
+      "ClassName": "MovementHandle",
+      "ClassInfoName": "MovementHandleInfo",
+      "data": {
+        "Multiplier": 0.6,
+        "EndImmediate": true
+      }
+    },
+    {
+      "ClassName": "WaitForEndAnim"
+    },
+    {
+      "ClassName": "PeterUntimateHandle",
+      "ClassInfoName": "PeterUntimateInfo",
+      "data": {
+        "LayerMark": "Hero",
+        "EffectsData": "[{\"ClassName\": \"Knockback\",\"ClassInfoName\": \"KnockbackInfo\",\"data\":{\"Force\": 3}}]"
+      }
     }
   ]
 ]

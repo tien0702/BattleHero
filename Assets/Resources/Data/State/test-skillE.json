@@ -4,14 +4,27 @@
       "ClassName": "TT.PlayAnim",
       "ClassInfoName": "TT.PlayAnimInfo",
       "data": {
-        "AnimName": "MoveFWD_Normal_InPlace_SwordAndShield"
+        "AnimName": "Talent"
       }
     },
     {
-      "ClassName": "TT.PlayAnim",
-      "ClassInfoName": "TT.PlayAnimInfo",
+      "ClassName": "InputKeyCondition",
+      "ClassInfoName": "KeyInfo",
       "data": {
-        "AnimName": "MoveFWD_Normal_InPlace_SwordAndShield"
+        "KeyName": "E"
+      }
+    },
+    {
+      "ClassName": "WaitForEndAnim"
+    },
+    {
+      "ClassName": "PeterTalentHandle",
+      "ClassInfoName": "PeterTalentInfo",
+      "data": {
+        "Radius": 3,
+        "Multiplier": 1,
+        "LayerMark": "Hero",
+        "EffectsData": "[{\"ClassName\": \"Knockup\",\"ClassInfoName\": \"KnockupInfo\",\"data\":{\"Force\": 10}}]"
       }
     }
   ]

@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour, IGameService
 
         var gameManager = GameObject.FindAnyObjectByType<GameManager>();
         ServiceLocator.Current.Register(gameManager);
+
+        Application.targetFrameRate = 1000;
     }
 
     private void Awake()

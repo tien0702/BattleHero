@@ -66,6 +66,7 @@ namespace TT
         public virtual float Radius => _radius;
         public virtual string JoysickID => _joysickID;
         public virtual Vector3 Direction => _direction;
+        public virtual Vector3 Direction3D => new Vector3(_direction.x, 0, _direction.y);
         public virtual bool IsControl => !_direction.Equals(Vector3.zero);
         #endregion
 

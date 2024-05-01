@@ -1,0 +1,31 @@
+[
+  [
+    {
+      "ClassName": "TT.PlayAnim",
+      "ClassInfoName": "TT.PlayAnimInfo",
+      "data": {
+        "AnimName": "Stun"
+      }
+    },
+    {
+      "ClassName": "InputKeyCondition",
+      "ClassInfoName": "KeyInfo",
+      "data": {
+        "KeyName": "E"
+      }
+    },
+    {
+      "ClassName": "WaitForEndAnim"
+    },
+    {
+      "ClassName": "PeterTalentHandle",
+      "ClassInfoName": "PeterTalentInfo",
+      "data": {
+        "Radius": 3,
+        "Multiplier": 1,
+        "LayerMark": "Hero",
+        "EffectsData": "[{\"ClassName\": \"Knockup\",\"ClassInfoName\": \"KnockupInfo\",\"data\":{\"Force\": 10}}]"
+      }
+    }
+  ]
+]

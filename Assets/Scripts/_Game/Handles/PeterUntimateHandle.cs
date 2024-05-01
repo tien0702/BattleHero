@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TT;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -24,6 +25,7 @@ public class PeterUntimateHandle : BaseHandleBehaviour, IOwn, IInfo
     //Informations
     IBattleEffect[] _effects;
 
+    ParticleSystem _vfx;
     public override void Handle()
     {
         _animationEvent.OnAttack += OnAttack;
@@ -34,12 +36,17 @@ public class PeterUntimateHandle : BaseHandleBehaviour, IOwn, IInfo
     {
         _weapCollider.enabled = true;
         _hero?.Weapon?.Events.RegisterEvent(WeaponController.WeapEvent.OnHitTarget, OnHitTarget);
+
+        _vfx.gameObject.SetActive(true);
     }
 
     void OnEndAttack()
     {
         _weapCollider.enabled = false;
         _hero?.Weapon?.Events.UnRegisterEvent(WeaponController.WeapEvent.OnHitTarget, OnHitTarget);
+
+        _vfx.gameObject.SetActive(false);
+        _vfx.Stop();
         EndHandle();
     }
 
@@ -88,6 +95,13 @@ public class PeterUntimateHandle : BaseHandleBehaviour, IOwn, IInfo
         _animationEvent = obj.GetComponent<AnimEventReceiver>();
         _weapCollider = _hero.Weapon.GetComponent<Collider>();
         _joyMove = JoystickController.GetJoystick(GameManager.JoyMoveId);
+
+        var prefab = Resources.Load<ParticleSystem>("Prefabs/SwordWhirlwindYellow");
+        _vfx = Instantiate(prefab, transform);
+        Vector3 pos = Vector3.zero;
+        pos.y = _hero.Weapon.transform.position.y;
+        _vfx.transform.localPosition = pos;
+        _vfx.gameObject.SetActive(false);
     }
 
     public void SetInfo(object info)

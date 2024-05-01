@@ -6,4 +6,5 @@ public class DefineStatID
     public const string MP = "MP";
     public const string SPD = "SPD";
     public const string ASPD = "ASPD";
+    public const string ResStun = "ResStun";
 }

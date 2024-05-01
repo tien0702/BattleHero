@@ -24,7 +24,7 @@ namespace TT
             return money.ToString();
         }
 
-        public string ConvertToHH_MM_DD(int totalSeconds)
+        public static string ConvertToHH_MM_DD(int totalSeconds)
         {
             int hours = totalSeconds / 3600;
             int minutes = (totalSeconds % 3600) / 60;
@@ -32,6 +32,13 @@ namespace TT
 
             string formattedTime = $"{hours:D2}:{minutes:D2}:{seconds:D2}";
             return formattedTime;
+        }
+
+        public static string ConvertToMM_DD(float time)
+        {
+            int minutes = Mathf.FloorToInt(time / 60);
+            int seconds = Mathf.FloorToInt(time % 60);
+            return string.Format("{0:00}:{1:00}", minutes, seconds);
         }
 
         public static string FormatTime(int hours, int minutes, int seconds)

@@ -9,19 +9,19 @@ public class HeroController : EntityController, IDamageable
     = new ObserverEvents<HeroEvent, object>();
 
     #endregion
+
+    #region References
+    [Header("References")]
     [SerializeField] protected Transform _weapAttachment;
+    public Transform Model;
+    #endregion
+
     public HealthController HealCtrl { protected set; get; }
     public WeaponController Weapon { protected set; get; }
     public EntityStatController EntityStatCtrl { protected set; get; }
-    public Transform Model;
 
     protected virtual void Start()
     {
-        /*var model = GameObjectUtilities.FindObjectByTag(transform, "Model");
-        Weapon = model.GetComponentInChildren<WeaponController>();
-
-        Weapon.Owner = this;*/
-
         EntityStatCtrl = GetComponent<EntityStatController>();
     }
 

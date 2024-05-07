@@ -5,4 +5,5 @@ using UnityEngine;
 public interface IBattleEffect
 {
     void HandleEffect(GameObject target, Vector3 direction);
+    BattleEffectType Type { get; }
 }

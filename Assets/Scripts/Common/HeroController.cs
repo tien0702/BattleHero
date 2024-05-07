@@ -39,6 +39,16 @@ public class HeroController : EntityController, IDamageable
         var floatText = ServiceLocator.Current.Get<FloatingTextService>().GetByName("Heal");
         floatText.Spawn(transform.position, message.Dame);
         if (HealCtrl != null) HealCtrl.CurrentValue -= message.Dame;
+
+        // effect
+
+        var _effectPool = ServiceLocator.Current.Get<ObjectPool>();
+
+        var ef = _effectPool.GetObject<ParticleSystem>("HitEffect");
+        ef.transform.position = transform.position + Vector3.up;
+        ef.Play();
+        LeanTween.delayedCall(ef.main.duration, () => { ef.gameObject.SetActive(false); });
+
         Events.Notify(HeroEvent.OnTakeDamage, message);
     }
 }

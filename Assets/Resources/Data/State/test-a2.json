@@ -20,7 +20,7 @@
       "data": {
         "Range": 1,
         "LayerMark": "Hero",
-        "EffectsData": "[{\"ClassName\": \"Knockback\",\"ClassInfoName\": \"KnockbackInfo\",\"data\":{\"Force\": 4}}]"
+        "BattleEffect": "[{\"Type\": \"Knockback\", \"Params\": [4]}]"
       }
     },
     {

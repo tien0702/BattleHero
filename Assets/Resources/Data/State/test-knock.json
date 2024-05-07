@@ -1,0 +1,14 @@
+[
+  [
+    {
+      "ClassName": "TT.PlayAnim",
+      "ClassInfoName": "TT.PlayAnimInfo",
+      "data": {
+        "AnimName": "Jump_Normal"
+      }
+    },
+    {
+        
+    }
+  ]
+]

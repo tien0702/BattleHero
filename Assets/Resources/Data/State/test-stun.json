@@ -4,28 +4,14 @@
       "ClassName": "TT.PlayAnim",
       "ClassInfoName": "TT.PlayAnimInfo",
       "data": {
-        "AnimName": "Stun"
+        "AnimName": "Dizzy"
       }
     },
     {
-      "ClassName": "InputKeyCondition",
-      "ClassInfoName": "KeyInfo",
-      "data": {
-        "KeyName": "E"
-      }
+      "ClassName": "StunCondition"
     },
     {
-      "ClassName": "WaitForEndAnim"
-    },
-    {
-      "ClassName": "PeterTalentHandle",
-      "ClassInfoName": "PeterTalentInfo",
-      "data": {
-        "Radius": 3,
-        "Multiplier": 1,
-        "LayerMark": "Hero",
-        "EffectsData": "[{\"ClassName\": \"Knockup\",\"ClassInfoName\": \"KnockupInfo\",\"data\":{\"Force\": 10}}]"
-      }
+      "ClassName": "StunHandle"
     }
   ]
 ]

@@ -25,13 +25,25 @@ public class PlayerController : HeroController
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        BattleEffect[] effects = new BattleEffect[1];
+        effects[0] = new BattleEffect()
+        {
+            Type = BattleEffectType.Stun,
+            Params = new float[] { 1 }
+        };
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             DamageMessage message = new DamageMessage()
             {
-                Dame = 10
+                Dame = 10,
+                BattleEffects = effects
             };
-            this.TakeDame(message);
+
+            IDamageable[] damageables = this.GetComponents<IDamageable>();
+            for(int i = 0; i < damageables.Length; i++)
+            {
+                damageables[i].TakeDame(message);
+            }
         }
     }
 }

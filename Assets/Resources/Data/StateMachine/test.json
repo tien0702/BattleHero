@@ -5,7 +5,7 @@
       "ClassInfoName": "TT.StateInfo",
       "data": {
         "StateName": "idle",
-        "InterruptibleStates": ["dead", "hurt", "skillQ", "skillE"],
+        "InterruptibleStates": ["dead", "stun", "hurt", "skillQ", "skillE"],
         "NextStates": ["a1", "run", "jump", "skillE"]
       }
     },
@@ -97,6 +97,15 @@
         "StateName": "dead",
         "InterruptibleStates": [],
         "NextStates": []
+      }
+    },
+    {
+      "ClassName": "TT.StateController",
+      "ClassInfoName": "TT.StateInfo",
+      "data": {
+        "StateName": "stun",
+        "InterruptibleStates": [],
+        "NextStates": ["idle", "run"]
       }
     }
   ]

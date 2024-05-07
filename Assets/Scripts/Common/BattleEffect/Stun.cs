@@ -12,6 +12,9 @@ public class StunInfo
 public class Stun : IBattleEffect, IInfo
 {
     public StunInfo Info { get; private set; }
+
+    public BattleEffectType Type => BattleEffectType.Stun;
+
     public void HandleEffect(GameObject target, Vector3 direction)
     {
         EntityStatController statCtrl = target.GetComponent<EntityStatController>();

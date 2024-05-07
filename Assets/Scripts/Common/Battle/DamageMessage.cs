@@ -7,5 +7,5 @@ public class DamageMessage
     public GameObject Attacker;
     public int Dame;
     public Vector3 Direction;
-    public IBattleEffect[] Effects;
+    public BattleEffect[] BattleEffects;
 }

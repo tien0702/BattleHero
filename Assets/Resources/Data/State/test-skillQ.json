@@ -33,7 +33,7 @@
       "ClassInfoName": "PeterUntimateInfo",
       "data": {
         "LayerMark": "Hero",
-        "EffectsData": "[{\"ClassName\": \"Knockback\",\"ClassInfoName\": \"KnockbackInfo\",\"data\":{\"Force\": 3}}]"
+        "BattleEffect": "[{\"Type\": \"Knockback\", \"Params\": [3]}]"
       }
     }
   ]

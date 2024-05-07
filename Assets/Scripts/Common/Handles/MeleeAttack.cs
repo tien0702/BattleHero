@@ -7,7 +7,7 @@ public class MeleeAttackInfo
 {
     public float Range;
     public string LayerMark;
-    public string EffectsData;
+    public string BattleEffect;
 }
 
 public class MeleeAttack : BaseHandle, IOwn, IInfo
@@ -22,8 +22,7 @@ public class MeleeAttack : BaseHandle, IOwn, IInfo
     CameraShake _cameraShake;
     ObjectPool _effectPool;
 
-    //Informations
-    IBattleEffect[] _effects;
+    BattleEffect[] _battleEffects;
 
     public override void Handle()
     {
@@ -47,28 +46,34 @@ public class MeleeAttack : BaseHandle, IOwn, IInfo
     void OnHitTarget(object data)
     {
         Transform target = data as Transform;
-        IDamageable damageable = target.GetComponent<IDamageable>();
         _cameraShake.Shake(0.1f, 0.05f);
 
-        HashSet<Transform> targets = new HashSet<Transform>();
-        if (damageable != null && targets.Add(target))
-        {
-            var ef = _effectPool.GetObject<ParticleSystem>("HitEffect");
-            ef.transform.position = target.position + Vector3.up;
-            ef.Play();
-            LeanTween.delayedCall(ef.main.duration, () => { ef.gameObject.SetActive(false); });
-            if (damageable != null)
-            {
-                DamageMessage message = new DamageMessage()
-                {
-                    Attacker = _hero.gameObject,
-                    Dame = (int)_statController.GetStatByID(DefineStatID.ATK).FinalValue,
-                    Direction = target.transform.position - _hero.transform.position,
-                    Effects = _effects
-                };
+        IDamageable[] damageables = target.GetComponents<IDamageable>();
 
-                damageable.TakeDame(message);
+        DamageMessage message = new DamageMessage()
+        {
+            Attacker = _hero.gameObject,
+            Dame = (int)_statController.GetStatByID(DefineStatID.ATK).FinalValue,
+            Direction = target.transform.position - _hero.transform.position,
+            BattleEffects = _battleEffects
+        };
+        for(int i = 0; i < _battleEffects.Length; i++)
+        {
+            if(_battleEffects[i].Type == BattleEffectType.Knockback)
+            {
+                float force = _battleEffects[i].Params[0];
+                _battleEffects[i].Params = new float[4];
+                _battleEffects[i].Params[0] = force;
+                _battleEffects[i].Params[1] = message.Direction.x;
+                _battleEffects[i].Params[2] = message.Direction.y;
+                _battleEffects[i].Params[3] = message.Direction.z;
             }
+        }
+        HashSet<Transform> targets = new HashSet<Transform>();
+        for(int i = 0; i < damageables.Length; i++)
+        {
+            if (!targets.Add(target)) continue;
+            damageables[i].TakeDame(message);
         }
     }
 
@@ -83,7 +88,7 @@ public class MeleeAttack : BaseHandle, IOwn, IInfo
         if (info is MeleeAttackInfo)
         {
             this.Info = (MeleeAttackInfo)info;
-            _effects = BattleEffectUtils.GetEffectsText(Info.EffectsData);
+            _battleEffects = BattleEffectController.Get(Info.BattleEffect);
             _cameraShake = GameObject.FindAnyObjectByType<CameraShake>();
         }
     }

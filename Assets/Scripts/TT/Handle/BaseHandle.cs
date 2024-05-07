@@ -9,7 +9,7 @@ namespace TT
 
         public abstract void Handle();
 
-        public abstract void ResetHandle();
+        public virtual void ResetHandle() { }
 
         protected virtual void EndHandle()
         {

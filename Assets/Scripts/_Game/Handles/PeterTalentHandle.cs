@@ -23,7 +23,6 @@ public class PeterTalentHandle : BaseHandleBehaviour, IInfo
     ObjectPool _effectPool;
 
     //Informations
-    IBattleEffect[] _effects;
     LayerMask _layerMask;
 
     private void Start()
@@ -49,21 +48,12 @@ public class PeterTalentHandle : BaseHandleBehaviour, IInfo
         EndHandle();
         _cameraShake.Shake(0.12f, 0.1f);
         Collider[] colliders = Physics.OverlapSphere(transform.position, Info.Radius, _layerMask);
-        
-        var prefab = Resources.Load<ParticleSystem>("Prefabs/MysticExplosionOrange");
-        var vfx = Instantiate(prefab);
-        vfx.gameObject.SetActive(true);
-        vfx.transform.position = transform.position;
-        var delay = vfx.AddComponent<DelayToDestroy>();
-        delay.SetDelay(vfx.main.duration);
 
-        vfx.Play();
         // Create DamageMessage
         DamageMessage message = new DamageMessage()
         {
             Attacker = gameObject,
-            Dame = (int)(_statCtrl.GetStatByID(DefineStatID.ATK).FinalValue * Info.Multiplier),
-            Effects = _effects
+            Dame = (int)(_statCtrl.GetStatByID(DefineStatID.ATK).FinalValue * Info.Multiplier)
         };
 
         for(int i = 0; i < colliders.Length; i++)
@@ -89,7 +79,6 @@ public class PeterTalentHandle : BaseHandleBehaviour, IInfo
         if (info is PeterTalentInfo)
         {
             this.Info = (PeterTalentInfo)info;
-            _effects = BattleEffectUtils.GetEffectsText(Info.EffectsData);
             _cameraShake = GameObject.FindAnyObjectByType<CameraShake>();
             _layerMask = LayerMask.GetMask(Info.LayerMark);
         }

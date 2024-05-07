@@ -20,12 +20,7 @@ public class PeterUntimateHandle : BaseHandleBehaviour, IOwn, IInfo
     AnimEventReceiver _animationEvent;
     Collider _weapCollider;
     CameraShake _cameraShake;
-    JoystickController _joyMove;
 
-    //Informations
-    IBattleEffect[] _effects;
-
-    ParticleSystem _vfx;
     public override void Handle()
     {
         _animationEvent.OnAttack += OnAttack;
@@ -37,7 +32,7 @@ public class PeterUntimateHandle : BaseHandleBehaviour, IOwn, IInfo
         _weapCollider.enabled = true;
         _hero?.Weapon?.Events.RegisterEvent(WeaponController.WeapEvent.OnHitTarget, OnHitTarget);
 
-        _vfx.gameObject.SetActive(true);
+        //_vfx.gameObject.SetActive(true);
     }
 
     void OnEndAttack()
@@ -45,8 +40,8 @@ public class PeterUntimateHandle : BaseHandleBehaviour, IOwn, IInfo
         _weapCollider.enabled = false;
         _hero?.Weapon?.Events.UnRegisterEvent(WeaponController.WeapEvent.OnHitTarget, OnHitTarget);
 
-        _vfx.gameObject.SetActive(false);
-        _vfx.Stop();
+        //_vfx.gameObject.SetActive(false);
+        //_vfx.Stop();
         EndHandle();
     }
 
@@ -72,8 +67,7 @@ public class PeterUntimateHandle : BaseHandleBehaviour, IOwn, IInfo
                 {
                     Attacker = _hero.gameObject,
                     Dame = (int)_statController.GetStatByID(DefineStatID.ATK).FinalValue,
-                    Direction = target.transform.position - _hero.transform.position,
-                    Effects = _effects
+                    Direction = target.transform.position - _hero.transform.position
                 };
 
                 damageable.TakeDame(message);
@@ -94,14 +88,9 @@ public class PeterUntimateHandle : BaseHandleBehaviour, IOwn, IInfo
         var obj = GameObjectUtilities.FindObjectByTag(_hero.transform, "Model");
         _animationEvent = obj.GetComponent<AnimEventReceiver>();
         _weapCollider = _hero.Weapon.GetComponent<Collider>();
-        _joyMove = JoystickController.GetJoystick(GameManager.JoyMoveId);
 
-        var prefab = Resources.Load<ParticleSystem>("Prefabs/SwordWhirlwindYellow");
-        _vfx = Instantiate(prefab, transform);
         Vector3 pos = Vector3.zero;
         pos.y = _hero.Weapon.transform.position.y;
-        _vfx.transform.localPosition = pos;
-        _vfx.gameObject.SetActive(false);
     }
 
     public void SetInfo(object info)
@@ -109,7 +98,6 @@ public class PeterUntimateHandle : BaseHandleBehaviour, IOwn, IInfo
         if (info is PeterUntimateInfo)
         {
             this.Info = (PeterUntimateInfo)info;
-            _effects = BattleEffectUtils.GetEffectsText(Info.EffectsData);
             _cameraShake = GameObject.FindAnyObjectByType<CameraShake>();
         }
     }

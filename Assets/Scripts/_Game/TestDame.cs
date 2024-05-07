@@ -4,24 +4,11 @@ using System.Collections.Generic;
 using TT;
 using UnityEngine;
 
-public class TestDame : MonoBehaviour, IDamageable
+public class TestDame : MonoBehaviour
 {
-    public void TakeDame(DamageMessage message)
+    private void Awake()
     {
-        var floatText = ServiceLocator.Current.Get<FloatingTextService>().GetByName("Heal");
-        floatText.Spawn(transform.position, message.Dame);
-
-        if (message.Effects != null)
-        {
-            foreach (var eff in message.Effects)
-            {
-                if (eff != null) { eff.HandleEffect(gameObject, message.Direction); }
-            }
-        }
-    }
-
-    public void Test()
-    {
-
+        string data = "{\"Type\": \"Knockback\", \"Params\": [4]}";
+        var s = BattleEffectController.GetFromString(data);
     }
 }

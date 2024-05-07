@@ -24,7 +24,7 @@
         "Radius": 3,
         "Multiplier": 1,
         "LayerMark": "Hero",
-        "EffectsData": "[{\"ClassName\": \"Knockup\",\"ClassInfoName\": \"KnockupInfo\",\"data\":{\"Force\": 10}}]"
+        "BattleEffect": "[{\"Type\": \"Knockup\", \"Params\": [10]}]"
       }
     }
   ]
